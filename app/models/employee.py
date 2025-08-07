@@ -6,7 +6,7 @@ from sqlalchemy import DateTime
 from sqlalchemy.sql import func
 
 class Employee(Base):
-    __tablename__ = "Employees"
+    __tablename__ = 'Employees'
 
     id = Column(Integer, primary_key=True, index=True)
     firstname = Column(String, nullable=False)
@@ -14,11 +14,11 @@ class Employee(Base):
     email = Column(String, unique=True, index=True, nullable=False)
     address = Column(String, nullable=False)
     phone = Column(String, nullable=False, unique=True)
-    country = Column(String, nullable=False)
+    country = Column(String, nullable=False, default='MX')
     age = Column(Integer, nullable=True, default=18)
-    gender = Column(String, nullable=False, default="other")  
-    occupation_id = Column(Integer, ForeignKey("occupations.id"), nullable=False)
-    occupation = relationship("Occupation", back_populates="employees") # For ORM
+    gender = Column(String, nullable=False, default='I prefer not to say')  
+    occupation_id = Column(Integer, ForeignKey('Occupations.id'), nullable=False, default=1)
+    occupation = relationship('Occupation', back_populates='Employees') # For ORM
     salary_per_month = Column(Numeric(10, 2), nullable=False, default=800.00)  
     is_admin = Column(Boolean, nullable=False, default=False)  
     is_active = Column(Boolean, nullable=False, default=True)
