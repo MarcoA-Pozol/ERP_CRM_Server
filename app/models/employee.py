@@ -1,13 +1,12 @@
 from sqlalchemy import Column, Integer, String, Numeric, ForeignKey, Boolean
 from sqlalchemy.orm import relationship
 from app.db.session import Base
-from . occupation import Occupation 
 from datetime import datetime
 from sqlalchemy import DateTime
 from sqlalchemy.sql import func
 
 class Employee(Base):
-    __tablename__ = "employees"
+    __tablename__ = "Employees"
 
     id = Column(Integer, primary_key=True, index=True)
     firstname = Column(String, nullable=False)
@@ -17,7 +16,7 @@ class Employee(Base):
     phone = Column(String, nullable=False, unique=True)
     country = Column(String, nullable=False)
     age = Column(Integer, nullable=True, default=18)
-    gender = Column(String, nullable=False, default="Other")  
+    gender = Column(String, nullable=False, default="other")  
     occupation_id = Column(Integer, ForeignKey("occupations.id"), nullable=False)
     occupation = relationship("Occupation", back_populates="employees") # For ORM
     salary_per_month = Column(Numeric(10, 2), nullable=False, default=800.00)  
